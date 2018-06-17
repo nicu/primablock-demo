@@ -4,8 +4,9 @@
   margin: 0 16px -16px 16px;
 }
 
-.cdk-column-position {
-  max-width: 88px;
+.cdk-column-position,
+.cdk-column-identicon {
+  max-width: 48px;
 }
 
 .cdk-column-whitelist,

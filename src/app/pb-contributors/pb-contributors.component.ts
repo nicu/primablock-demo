@@ -5,6 +5,8 @@ import {
   PbDatasetService
 } from "../pb-dataset/pb-dataset.service";
 
+import Identicon from "identicon.js";
+
 @Component({
   selector: "pb-contributors",
   templateUrl: "./pb-contributors.component.html",
@@ -15,7 +17,13 @@ export class PbContributorsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<ContributorItem>;
 
-  displayedColumns = ["position", "address", "balance", "whitelist"];
+  displayedColumns = [
+    "position",
+    "identicon",
+    "address",
+    "balance",
+    "whitelist"
+  ];
 
   filter = {
     ALL: "all",
@@ -29,7 +37,11 @@ export class PbContributorsComponent implements OnInit {
   constructor(private dataService: PbDatasetService) {
     const contributors = dataService.getContributors().map((c, i) => ({
       ...c,
-      position: i + 1
+      position: i + 1,
+      identicon: new Identicon(c.address.padEnd(15), {
+        size: 24,
+        background: [255, 255, 255, 0]
+      }).toString()
     }));
 
     this.dataSource = new MatTableDataSource(contributors);

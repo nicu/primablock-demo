@@ -30,6 +30,7 @@ export interface ContributorItem {
   address: string;
   balance?: number;
   whitelist?: boolean;
+  identicon?: string;
 }
 
 const CONTRIBUTORS: ContributorItem[] = [

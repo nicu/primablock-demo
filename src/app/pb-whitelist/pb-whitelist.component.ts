@@ -14,6 +14,8 @@ import {
   ContributorItem
 } from "../pb-dataset/pb-dataset.service";
 
+import Identicon from "identicon.js";
+
 @Component({
   selector: "pb-whitelist",
   templateUrl: "./pb-whitelist.component.html",
@@ -25,7 +27,7 @@ export class PbWhitelistComponent implements OnInit {
   dataSource: MatTableDataSource<ContributorItem>;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ["position", "address", "whitelist"];
+  displayedColumns = ["position", "identicon", "address", "whitelist"];
 
   constructor(private dataService: PbDatasetService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource([]);
@@ -41,7 +43,11 @@ export class PbWhitelistComponent implements OnInit {
         .map((key, i) => ({
           position: i + 1,
           address: key,
-          whitelist: updatedWhitelist[key]
+          whitelist: updatedWhitelist[key],
+          identicon: new Identicon(key.padEnd(15), {
+            size: 24,
+            background: [255, 255, 255, 0]
+          }).toString()
         }));
     });
   }

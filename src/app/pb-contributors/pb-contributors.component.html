@@ -25,6 +25,14 @@
       <mat-footer-cell *matFooterCellDef>Total</mat-footer-cell>
     </ng-container>
 
+    <!-- Identicon Column -->
+    <ng-container matColumnDef="identicon">
+      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <img width=32 height=32 src="data:image/png;base64,{{row.identicon}}" /> </mat-cell>
+      <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+    </ng-container>
+
     <!-- Address Column -->
     <ng-container matColumnDef="address">
       <mat-header-cell *matHeaderCellDef>Address</mat-header-cell>
