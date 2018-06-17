@@ -1,0 +1,59 @@
+<div class="mat-elevation-z8">
+
+  <mat-toolbar>
+    <mat-form-field>
+      <input matInput placeholder="Filter" (keyup)="applyFilter($event.target.value)">
+    </mat-form-field>
+    <mat-button-toggle-group #group="matButtonToggleGroup" value="all">
+      <mat-button-toggle value="all" selected title="Show all contributors" (click)="setFilterType(filter.ALL)">
+        <mat-icon>group</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="whitelisted" title="Show only whitelisted contributors" (click)="setFilterType(filter.WHITELISTED)">
+        <mat-icon>person_outline</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="Blacklisted" title="Show only blacklisted contributors" (click)="setFilterType(filter.BLACKLISTED)">
+        <mat-icon>person</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </mat-toolbar>
+
+  <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>No.</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.position}}</mat-cell>
+      <mat-footer-cell *matFooterCellDef>Total</mat-footer-cell>
+    </ng-container>
+
+    <!-- Address Column -->
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef>Address</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.address}}</mat-cell>
+      <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+    </ng-container>
+
+    <!-- Balance Column -->
+    <ng-container matColumnDef="balance">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Balance</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.balance}}</mat-cell>
+      <mat-footer-cell *matFooterCellDef>{{getTotalBalance()}}</mat-footer-cell>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="whitelist">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Whitelisted</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-slide-toggle color="primary" [checked]="row.whitelist" (change)="toggleWhitelist(row)"></mat-slide-toggle>
+      </mat-cell>
+      <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+
+  </mat-table>
+
+  <mat-paginator #paginator [length]="dataSource.data.length" [pageIndex]="0" [pageSize]="10">
+  </mat-paginator>
+</div>

@@ -1,0 +1,28 @@
+.mat-toolbar .mat-form-field {
+  font-size: small;
+  flex: 1;
+  margin: 0 16px -16px 16px;
+}
+
+.cdk-column-position {
+  max-width: 88px;
+}
+
+.cdk-column-whitelist,
+.cdk-column-balance {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 88px;
+}
+
+.cdk-column-whitelist {
+  justify-content: center;
+}
+
+.mat-footer-row {
+  font-weight: bold;
+}
+
+.mat-row:hover {
+  background-color: rgba(197, 202, 233, 0.3);
+}
